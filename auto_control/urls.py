@@ -27,6 +27,11 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/', CustomAuthToken.as_view(), name='login'),
+    path('request-reset-password/', RequestPasswordResetEmail.as_view(), name='request-reset-password'),
+    path('reset-password/', ResetPassword.as_view(), name='reset-password'),
+    path('change-password/', ChangePasswordView.as_view(), name="change-password"),
+    path('api/v1/app-users/', include('users.urls'))
 ]
 
 if settings.DEBUG:
