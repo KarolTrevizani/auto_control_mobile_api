@@ -12,20 +12,19 @@ class UserCreationTests(APITestCase):
         """
         Ensure we can create a new user.
         """
-        url = reverse('users:register-user-list')
-        data = {'username': 'testuser', 'email': 'user@example.com', 'password': 'testpassword123'}
+        url = reverse('users:user-list')
+        data = {'name': 'Test User', 'cnh': 'HT123456','username': 'testuser', 'email': 'user_test@gmail.com', 'password': 'testpassword123'}
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(User.objects.count(), 1)
-        self.assertEqual(User.objects.get().email, 'user@example.com')
+        self.assertEqual(User.objects.get().email, 'user_test@gmail.com')
 
     def test_create_user_with_existing_email(self):
         """
         Ensure we cannot create a user with an already registered email.
         """
-        User.objects.create_user(username='testuser1', email='user@example.com', password='testpassword123')
-        url = reverse('users:register-user-list')
-        data = {'username': 'testuser2', 'email': 'user@example.com', 'password': 'newpassword123'}
+        User.objects.create_user(username='testuser1', email='user_test@gmail.com', password='testpassword123')
+        url = reverse('users:user-list')
+        data = {'username': 'testuser2', 'email': 'user_test@gmail.com', 'password': 'newpassword123'}
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, 309)
 
@@ -33,7 +32,7 @@ class UserCreationTests(APITestCase):
 
 class UserLoginTests(APITestCase):
     def setUp(self):
-        self.user = User.objects.create_user(username='testuser', email='user@example.com', password='testpassword123')
+        self.user = User.objects.create_user(username='testuser', email='user_test@gmail.com', password='testpassword123')
         self.url = reverse('login')
 
     def test_login_success(self):
