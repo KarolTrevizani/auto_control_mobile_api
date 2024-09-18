@@ -31,7 +31,8 @@ urlpatterns = [
     path('request-reset-password/', RequestPasswordResetEmail.as_view(), name='request-reset-password'),
     path('reset-password/', ResetPassword.as_view(), name='reset-password'),
     path('change-password/', ChangePasswordView.as_view(), name="change-password"),
-    path('api/v1/app-users/', include('users.urls'))
+    path('api/v1/app-users/', include('users.urls')),
+    path('api/v1/app-vehicles/', include('vehicles.urls'))
 ]
 
 if settings.DEBUG:
