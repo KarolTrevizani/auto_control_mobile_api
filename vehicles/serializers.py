@@ -4,9 +4,9 @@ from .models import (
     Brand, TypeVehicle, Vehicle, VehicleImage
 )
 
-from expenses.serializers import (
-    ExpenseSerializer
-)
+# from expenses.serializers import (
+#     ExpenseSerializer
+# )
 
 class BrandSerializer(serializers.ModelSerializer):
     """Serializes Brand model data, including the identifier, name, and creation timestamp."""
@@ -43,7 +43,7 @@ class VehicleSerializer(serializers.ModelSerializer):
     brand_name = serializers.CharField(source='brand.name', read_only=True)
     owner_name = serializers.CharField(source='owner.name', read_only=True)
     images = VehicleImageSerializer(many=True, read_only=True, required=False)
-    expenses = ExpenseSerializer(many=True, read_only=True, required=False)
+    # expenses = ExpenseSerializer(many=True, read_only=True, required=False)
     
     class Meta:
         model = Vehicle
