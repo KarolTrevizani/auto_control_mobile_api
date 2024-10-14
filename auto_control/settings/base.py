@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django_filters',
     'users',
     'corsheaders',
-    'vehicles'
+    'vehicles',
+    'expenses'
 ]
 
 REST_FRAMEWORK = {
