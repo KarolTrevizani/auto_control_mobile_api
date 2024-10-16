@@ -9,4 +9,4 @@ RUN pip install --upgrade pip \
 
 COPY . /code/
 
-CMD python manage.py migrate --settings=auto_control.settings.development && python manage.py runserver 0.0.0.0:8000 --settings=auto_control.settings.development
+CMD python manage.py migrate --settings=auto_control.settings.development && python manage.py seed --settings=auto_control.settings.development && python manage.py runserver 0.0.0.0:8000 --settings=auto_control.settings.development
