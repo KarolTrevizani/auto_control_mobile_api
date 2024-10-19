@@ -12,8 +12,8 @@ DEBUG = True
 INSTALLED_APPS += ['debug_toolbar', ]
 
 # Development-specific middleware
-MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware', ]
-ALLOWED_HOSTS = ['10.50.100.154', 'localhost', '127.0.0.1', '*']
+MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware']
+ALLOWED_HOSTS = ['*']
 
 # Emanuel Test DB
 # DATABASES = {

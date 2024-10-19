@@ -43,7 +43,7 @@ class VehicleSerializer(serializers.ModelSerializer):
     brand_name = serializers.CharField(source='brand.name', read_only=True)
     owner_name = serializers.CharField(source='owner.name', read_only=True)
     images = VehicleImageSerializer(many=True, read_only=True, required=False)
-    expenses = ExpenseSerializer(many=True, read_only=True, required=False)
+    # expenses = ExpenseSerializer(many=True, read_only=True, required=False)
     
     class Meta:
         model = Vehicle
