@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
 from .serializers import (
-    TypeSerializer, BrandSerializer, VehicleImageSerializer, VehicleSerializer
+    TypeSerializer, BrandSerializer, VehicleImageSerializer, VehicleDetailsSerializer, VehicleSerializer
 )
 
 from .models import (
@@ -52,7 +52,7 @@ class VehicleImageViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
 
-class VehicleViewSet(viewsets.ModelViewSet):
+class VehicleDetailViewSet(viewsets.ModelViewSet):
     """
     A comprehensive viewset managing vehicles, supporting CRUD operations and filtering capabilities.
     Authenticated users can create a vehicle and upload images simultaneously, update vehicle data,
@@ -60,7 +60,7 @@ class VehicleViewSet(viewsets.ModelViewSet):
     """
 
     queryset = Vehicle.objects.all()
-    serializer_class = VehicleSerializer
+    serializer_class = VehicleDetailsSerializer
     permission_classes = [IsAuthenticated]
     filterset_class = VehicleFilter
     
@@ -74,7 +74,7 @@ class VehicleViewSet(viewsets.ModelViewSet):
             for image_file in images:
                 VehicleImage.objects.create(vehicle=vehicle, image=image_file)
                 
-            return Response(VehicleSerializer(vehicle).data, status=status.HTTP_201_CREATED)
+            return Response(VehicleDetailsSerializer(vehicle).data, status=status.HTTP_201_CREATED)
         else:
             return Response(f"Error: {serializer.errors}", status=status.HTTP_400_BAD_REQUEST)
         
@@ -95,6 +95,17 @@ class VehicleViewSet(viewsets.ModelViewSet):
                 for image_file in images:
                     VehicleImage.objects.create(vehicle=updated_vehicle, image=image_file)
 
-            return Response(VehicleSerializer(updated_vehicle).data, status=status.HTTP_200_OK)
+            return Response(VehicleDetailsSerializer(updated_vehicle).data, status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class VehicleViewSet(viewsets.ModelViewSet):
+    """
+    Get users' vehicles. Only GET request allowed
+    """
+
+    queryset = Vehicle.objects.all()
+    serializer_class = VehicleSerializer
+    permission_classes = [IsAuthenticated]
+    filterset_class = VehicleFilter

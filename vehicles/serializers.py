@@ -32,7 +32,7 @@ class VehicleImageSerializer(serializers.ModelSerializer):
         fields = ('id', 'vehicle', 'image')
 
     
-class VehicleSerializer(serializers.ModelSerializer):
+class VehicleDetailsSerializer(serializers.ModelSerializer):
     """
     Serializes Vehicle model data, including comprehensive details like name, description, type, brand,
     and owner. Nested serializers include vehicle images and expenses related to the vehicle.
@@ -48,3 +48,12 @@ class VehicleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vehicle
         fields = ('id', 'name', 'owner', 'owner_name', 'description', 'type', 'type_name', 'brand', 'year', 'license_plate', 'brand_name', 'expenses', 'images', 'created_at')
+
+        
+class VehicleSerializer(serializers.ModelSerializer):
+    """
+    Serializes Vehicle model data
+    """
+    class Meta:
+        model = Vehicle
+        fields = ('id', 'name')
