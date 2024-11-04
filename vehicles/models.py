@@ -39,6 +39,7 @@ class Vehicle(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     year = models.IntegerField(null=True)
     license_plate = models.CharField(max_length=50, default="")
+    state = models.CharField(max_length=2, default="")
     created_at = models.DateTimeField(default=timezone.now)
     
     def __str__(self):
