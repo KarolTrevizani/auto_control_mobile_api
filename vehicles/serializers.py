@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from users.models import User
 
 from .models import (
     Brand, TypeVehicle, Vehicle, VehicleImage
@@ -51,9 +52,8 @@ class VehicleDetailsSerializer(serializers.ModelSerializer):
 
         
 class VehicleSerializer(serializers.ModelSerializer):
-    """
-    Serializes Vehicle model data
-    """
+    owner = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+
     class Meta:
         model = Vehicle
-        fields = ('id', 'name')
+        fields = ('id', 'name', 'owner', 'description', 'type', 'brand', 'year', 'license_plate')

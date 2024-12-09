@@ -101,11 +101,13 @@ class VehicleDetailViewSet(viewsets.ModelViewSet):
 
 
 class VehicleViewSet(viewsets.ModelViewSet):
-    """
-    Get users' vehicles. Only GET request allowed
-    """
-
     queryset = Vehicle.objects.all()
     serializer_class = VehicleSerializer
     permission_classes = [IsAuthenticated]
     filterset_class = VehicleFilter
+
+    def perform_create(self, serializer):
+        """
+        Assign the authenticated user's ID as the owner.
+        """
+        serializer.save(owner=self.request.user)
